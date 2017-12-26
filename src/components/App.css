@@ -1,0 +1,97 @@
+
+.wrapper {
+    margin-top: 80px;
+    margin-bottom: 80px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+}
+.form-task{
+    margin-bottom: 20px;
+}
+.form-signin {
+    max-width: 380px;
+    padding: 15px 35px 45px;
+    margin: 0 auto;
+    background-color: #fff;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.task__sort {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.task__list {
+    padding-top: 30px;
+}
+.task__pagination{
+    text-align: center;
+}
+.task__item{
+    margin-bottom: 20px;
+    position: relative;
+}
+.task__edit {
+    position: absolute;
+    right: 15px;
+    top: 0;
+}
+.task__text {
+    margin-bottom: 20px;
+}
+
+.form-signin-heading,
+.checkbox {
+    margin-bottom: 30px;
+}
+
+.checkbox {
+    font-weight: normal;
+}
+
+.form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+}
+textarea[type="text"] {
+    margin-bottom: 20px;
+    height: 300px;
+}
+input[type="mail"] {
+    margin-bottom: 5px;
+}
+
+.form-group{
+    position: relative;
+}
+
+.form__error {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: red;
+}
+.input__error {
+    position: absolute;
+    left: 0;
+    font-size: 9px;
+    color: red;
+    top: -12px;
+}
+.page-404 {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.error-actions{
+    margin-top: 20px;
+}
