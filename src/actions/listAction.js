@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { LOAD_TASK } from './actionType';
 
-const URL = 'https://uxcandy.com/~shapoval/test-task-backend?developer=YaroslavBoiko';
-
+const URL = 'http://todo.awkoy.com';
 const setTask = (tasks) => {
     return {
         type: LOAD_TASK,
@@ -26,18 +25,18 @@ const loadTask = ({ page = 1, sort_field = 'id', sort_direction = 'asc' } = {}) 
     }
 };
 
-const addTask = (data) => {
+const addPost = (data) => {
 
     return dispatch => {
         axios({
-            url: URL,
-            crossDomain: true,
+            url: `${URL}/wp-json/wp/v2/posts`,
             method: 'POST',
-            mimeType: "multipart/form-data",
-            contentType: false,
-            processData: false,
             data: data,
-            dataType: "json"
+            crossDomain: true,
+            contentType: 'application/json',
+            beforeSend: function ( xhr ) {
+                xhr.setRequestHeader( 'Authorization', 'Basic ' + Base64.encode( 'awkoy:bz97as78pp' ) );
+            }
         })
             .then((response) => {
                 console.log(response);
@@ -49,4 +48,4 @@ const addTask = (data) => {
     }
 };
 
-export {loadTask, addTask};
+export {loadTask, addPost};
