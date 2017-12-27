@@ -1,22 +1,30 @@
 import axios from 'axios';
-import { LOAD_TASK } from './actionType';
+import {LOAD_ITEM} from "./actionType";
 
-const URL = 'http://todo.awkoy.com';
+axios.defaults.baseURL = 'http://todo.awkoy.com/wp-json';
+axios.defaults.contentType = 'application/json';
+axios.defaults.crossDomain = true;
+axios.defaults.auth = {
+        username: 'awkoy',
+        password: 'bz97as78pp'
+};
+
 const setTask = (tasks) => {
     return {
-        type: LOAD_TASK,
+        type: LOAD_ITEM,
         payload: tasks
     }
 };
 
-const loadTask = ({ page = 1, sort_field = 'id', sort_direction = 'asc' } = {}) => {
+const loadItem = () => {
+    console.log('item loaded');
     return dispatch => {
-        axios.get(URL, {
-            page,
-            sort_field,
-            sort_direction
+        axios({
+            url: `/wp/v2/posts?_embed`,
+            method: 'GET'
         })
             .then((response) => {
+                console.log(response);
                 dispatch(setTask(response.data));
             })
             .catch((err) => {
@@ -29,14 +37,9 @@ const addPost = (data) => {
 
     return dispatch => {
         axios({
-            url: `${URL}/wp-json/wp/v2/posts`,
+            url: `/wp/v2/posts`,
             method: 'POST',
-            data: data,
-            crossDomain: true,
-            contentType: 'application/json',
-            beforeSend: function ( xhr ) {
-                xhr.setRequestHeader( 'Authorization', 'Basic ' + Base64.encode( 'awkoy:bz97as78pp' ) );
-            }
+            data: {status: 'publish', ...data}
         })
             .then((response) => {
                 console.log(response);
@@ -48,4 +51,4 @@ const addPost = (data) => {
     }
 };
 
-export {loadTask, addPost};
+export { loadItem, addPost};

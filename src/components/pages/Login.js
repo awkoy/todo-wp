@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import classnames from 'classnames';
 import {withRouter} from "react-router-dom";
+import axios from 'axios';
 
 class Login extends Component {
 
@@ -15,6 +16,26 @@ class Login extends Component {
         }
     }
 
+    checkUser = (login, pass) => {
+        axios({
+            url: `http://todo.awkoy.com/wp-json/`,
+            method: 'GET',
+            auth: {
+                username: login,
+                password: pass
+            }
+        }).then(() => {
+            window.localStorage.setItem('is_loginned', true);
+            document.location.reload();
+            this.props.history.push('/');
+        }).catch((err) => {
+            let errors = {};
+            if (err.response.data.code === 'invalid_username') {errors.username = "Invalid login"; errors.password = "Incorrect password"}
+            if (err.response.data.code === 'incorrect_password') {errors.password = "Incorrect password"}
+            this.setState({errors});
+        });
+    };
+
     handleChange = (e) => {
         console.log(e.target.name, e.target.value);
         let errors = {...this.state.errors};
@@ -27,6 +48,7 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        const { username, password } = this.state;
 
         //validation
         let errors = {};
@@ -37,13 +59,7 @@ class Login extends Component {
 
         //submit
         if (isNotEmpty) {
-            if (this.state.username !== 'admin' || this.state.password !== '12345') {
-                errors.message = "Invalid Login/Password!";
-            } else {
-                window.localStorage.setItem('is_loginned', true);
-                document.location.reload();
-                this.props.history.push('/');
-            }
+            this.checkUser(username, password);
         }
     };
 

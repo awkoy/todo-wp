@@ -19,9 +19,6 @@ const Header = (props,context) => {
             {/*admin navbar begin*/}
             { user === 'admin' &&
                 <div className="container-fluid">
-                    <div className="navbar-header">
-                        <span className="navbar-brand">Test TodoApp: Administrator</span>
-                    </div>
                     <div className="navbar-right navbar-collapse">
                         <button
                             onClick={leaveOutAdmin}
@@ -36,14 +33,11 @@ const Header = (props,context) => {
             {/*user navbar begin*/}
             { user === 'default' &&
                 <div className="container-fluid">
-                    <div className="navbar-header">
-                        <span className="navbar-brand">Test TodoApp: User</span>
-                    </div>
                     <div className="navbar-right navbar-collapse">
                         <Link
                             to="/login"
                             className="btn navbar-btn btn-success">
-                            Log In
+                            Admin-Panel
                         </Link>
                     </div>
                 </div>

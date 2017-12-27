@@ -4,7 +4,7 @@ import itemReducer from './itemReducer';
 
 const rootReducer = combineReducers ({
     routing: routerReducer,
-    tasks: itemReducer
+    items: itemReducer
 });
 
 export default rootReducer;
